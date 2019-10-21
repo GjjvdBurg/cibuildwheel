@@ -97,6 +97,7 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
                     # run the tests in a subshell to keep that `activate`
                     # script from polluting the env
                     (
+                        set -o errexit
                         source "$venv_dir/bin/activate"
 
                         echo "Running tests using `which python`"
