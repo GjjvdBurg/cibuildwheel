@@ -109,7 +109,7 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
 
                         # Run the tests from a different directory
                         pushd $HOME
-                        sh -c {test_command}
+                        sh -o errexit -c {test_command}
                         popd
                     )
                     # exit if tests failed
