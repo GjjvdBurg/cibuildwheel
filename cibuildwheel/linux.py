@@ -111,11 +111,10 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
                         pushd $HOME
                         sh -o errexit -c {test_command}
                         popd
-                    ) || false
-
-                    #if [ $? -ne 0 ]; then
-                    #  exit 1;
-                    #fi
+                    )
+                    if [ $? -ne 0 ]; then
+                      exit 1;
+                    fi
 
                     # clean up
                     rm -rf "$venv_dir"
