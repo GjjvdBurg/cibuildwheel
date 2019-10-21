@@ -112,9 +112,13 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
                         sh -o errexit -c {test_command}
                         popd
                     )
-                    if [ $? -ne 0 ]; then
-                      exit 1;
-                    fi
+                    exit_code=$?
+
+                    echo "I am reached even though I shouldn't be"
+
+                    #if [ $? -ne 0 ]; then
+                    #  exit 1;
+                    #fi
 
                     # clean up
                     rm -rf "$venv_dir"
