@@ -120,7 +120,7 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
 
                         # Run the tests from a different directory
                         pushd $HOME
-                        {test_command}
+                        {test_command_bare}
                         echo "sh exit code: $?"
                         popd
                     )
@@ -138,8 +138,10 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
             pybin_paths=' '.join(c.path+'/bin' for c in platform_configs),
             test_requires=' '.join(test_requires),
             test_extras=test_extras,
-            test_command=prepare_command(test_command, project='/project') if test_command else ''
-            ,
+            test_command=shlex_quote(
+                prepare_command(test_command, project='/project') if test_command else ''
+            ),
+            test_command_bare=prepare_command(test_command, project='/project') if test_command else '',
             before_build=shlex_quote(
                 prepare_command(before_build, project='/project') if before_build else ''
             ),
