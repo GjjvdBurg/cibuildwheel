@@ -57,6 +57,8 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
             mkdir /output
             cd /project
 
+            set -o
+
             {environment_exports}
 
             for PYBIN in {pybin_paths}; do
