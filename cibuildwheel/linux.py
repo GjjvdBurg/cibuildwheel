@@ -111,10 +111,7 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
                         pushd $HOME
                         sh -o errexit -c {test_command}
                         popd
-                    )
-                    exit_code=$?
-
-                    echo "I am reached even though I shouldn't be"
+                    ) || false
 
                     #if [ $? -ne 0 ]; then
                     #  exit 1;
