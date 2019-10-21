@@ -57,6 +57,9 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
             mkdir /output
             cd /project
 
+
+            echo 'AAA'
+
             set -o
 
             {environment_exports}
@@ -97,7 +100,12 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
                     # run the tests in a subshell to keep that `activate`
                     # script from polluting the env
                     (
+                        echo "before"
+                        set -o
+
                         set -o errexit
+                        echo "after"
+                        set -o
                         source "$venv_dir/bin/activate"
 
                         echo "Running tests using `which python`"
