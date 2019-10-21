@@ -97,8 +97,6 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
                     (
                         source "$venv_dir/bin/activate"
 
-                        set -o
-
                         echo "Running tests using `which python`"
 
                         # Install the wheel we just built
