@@ -120,11 +120,14 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
 
                         # Run the tests from a different directory
                         pushd $HOME
-                        {test_command_bare}
+                        sh -o errexit -c {test_command}
                         echo "sh exit code: $?"
                         popd
                     )
                     echo "subshell exit code: $?"
+                    if [ $? -ne 0 ]; then
+                      exit 1;
+                    fi
 
                     # clean up
                     rm -rf "$venv_dir"
@@ -141,7 +144,6 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
             test_command=shlex_quote(
                 prepare_command(test_command, project='/project') if test_command else ''
             ),
-            test_command_bare=prepare_command(test_command, project='/project') if test_command else '',
             before_build=shlex_quote(
                 prepare_command(before_build, project='/project') if before_build else ''
             ),
