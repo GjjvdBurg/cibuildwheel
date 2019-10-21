@@ -124,7 +124,6 @@ def build(project_dir, output_dir, test_command, test_requires, test_extras, bef
                         echo "sh exit code: $?"
                         popd
                     )
-                    echo "subshell exit code: $?"
                     if [ $? -ne 0 ]; then
                       exit 1;
                     fi
